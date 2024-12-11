@@ -1,14 +1,11 @@
---> Creation des Tables:
+--$$->> Creation des Tables:
 
 -- DataBase Created
-
 
 CREATE DATABASE ClubVideo_db;
 USE ClubVideo_db;
 
-
 -- Table MEMBRE
-
 
 CREATE TABLE MEMBRE (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -17,9 +14,7 @@ CREATE TABLE MEMBRE (
     date_inscription DATE NOT NULL
 );
 
-
 -- Table ABONNEMENT
-
 
 CREATE TABLE ABONNEMENT (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,9 +25,7 @@ CREATE TABLE ABONNEMENT (
 	FOREIGN KEY (membre_id) REFERENCES membre(id) ON DELETE CASCADE
 );
 
-
 -- Table JEU
-
 
 CREATE TABLE JEU (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -43,9 +36,7 @@ CREATE TABLE JEU (
     multijoueur ENUM('oui', 'non') NOT NULL
 );
 
-
 -- Table EMPRUNTER
-
 
 CREATE TABLE EMPRUNTER (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -58,9 +49,7 @@ CREATE TABLE EMPRUNTER (
     FOREIGN KEY (id_jeu) REFERENCES JEU(id)
 );
 
-
 -- Table TOURNOI
-
 
 CREATE TABLE TOURNOI (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -69,9 +58,7 @@ CREATE TABLE TOURNOI (
     recompenses boolean NOT NULL
 );
 
-
 -- Table PARTICIPER
-
 
 CREATE TABLE PARTICIPER (
     id_membre INT,
@@ -84,7 +71,10 @@ CREATE TABLE PARTICIPER (
 );
 
 
---> Les donnees:
+
+--$$->> Les donnees
+
+--Filling the membre table:
 
 INSERT INTO membre (pseudo, email, date_inscription) VALUES
 ('olivia_adams', 'olivia@example.com', '2023-12-01'),
@@ -96,6 +86,7 @@ INSERT INTO membre (pseudo, email, date_inscription) VALUES
 ('james_jackson', 'james@example.com', '2023-09-12'),
 ('amelia_martin', 'amelia@example.com', '2023-10-05');
 
+--Filling the abonnement table:
 
 INSERT INTO abonnement (type_abonnement, date_debut, date_fin) VALUES 
 ('annuel', '2023-01-01', '2023-12-31'),
@@ -107,6 +98,7 @@ INSERT INTO abonnement (type_abonnement, date_debut, date_fin) VALUES
 ('hebdomadaire', '2024-11-15', '2024-11-21'),
 ('hebdomadaire', '2024-11-22', '2024-11-28');
 
+--Filling the jeu table:
 
 INSERT INTO JEU (titre, studio_developpement, genre, annee_sortie, multijoueur) VALUES
 ('Game of Thrones: The Game', 'Telltale Games', 2014, 'Aventure', false),
@@ -118,6 +110,7 @@ INSERT INTO JEU (titre, studio_developpement, genre, annee_sortie, multijoueur) 
 ('FIFA 23', 'EA Sports', 2022, 'Sports', true),
 ('Animal Crossing: New Horizons', 'Nintendo', 2020, 'Simulation', true);
 
+--Filling the tournoi table:
 
 INSERT INTO TOURNOI (nom_tournoi, date_tournoi, recompenses) VALUES
 ('Fortnite Championship', '2024-06-10', 'Cash prize, Trophies'),
@@ -129,6 +122,7 @@ INSERT INTO TOURNOI (nom_tournoi, date_tournoi, recompenses) VALUES
 ('FIFA 23 World Cup', '2024-12-20', 'Trophies, Exclusive skins'),
 ('Animal Crossing Villager Contest', '2024-08-30', 'Gift cards, Limited edition items');
 
+--Filling the emprunter table:
 
 INSERT INTO emprunter(id_membre, id_jeu, date_emprunt, date_retour_prevue, date_retour_reelle) VALUES
 (1, 2, '2024-02-01', '2024-02-15', '2024-02-14'),
@@ -142,6 +136,7 @@ INSERT INTO emprunter(id_membre, id_jeu, date_emprunt, date_retour_prevue, date_
 (7, 7, '2024-06-15', '2024-06-30', '2024-06-28'),
 (8, 8, '2024-07-01', '2024-07-15', '2024-07-13');
 
+--Filling the participer table:
 
 INSERT INTO Participer (id_membre, id_tournoi, score, rang_final) VALUES
 (1, 1, 90, 2),
